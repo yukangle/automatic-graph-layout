@@ -217,6 +217,29 @@ namespace Microsoft.Msagl.Drawing {
             return ret;
         }
 
+        public Node AddNode(string nodeId, string tooltip) {
+            Node ret;
+            if (RootSubgraph != null && RootSubgraph.IsUpdated) {
+                SubgraphMap.Clear();
+                foreach (var sg in RootSubgraph.AllSubgraphsDepthFirst())
+                    SubgraphMap[sg.Id] = sg;
+                RootSubgraph.IsUpdated = false;
+            }
+            Subgraph subgraph;
+            if (SubgraphMap.TryGetValue(nodeId, out subgraph))
+                return subgraph;
+
+            ret = nodeMap[nodeId] as Node;
+            if (ret == null) {
+                ret = new Node(nodeId, tooltip);
+                nodeMap[nodeId] = ret;
+#if TEST_MSAGL
+                history.Add(ret);
+#endif
+            }
+            return ret;
+        }
+
         /// <summary>
         /// adds a node to the graph
         /// </summary>
@@ -307,11 +330,15 @@ namespace Microsoft.Msagl.Drawing {
         /// <param name="edgeLabel">edge labe - can be null</param>
         /// <param name="target">target node id</param>
         /// <returns>Edge</returns>
-        public virtual Edge AddEdge(string source, string edgeLabel, string target) {
+        public virtual Edge AddEdge(string source, string target, string tooltip) {
+            return AddEdge(source, target, tooltip, null);
+        }
+
+        public virtual Edge AddEdge(string source, string target, string tooltip, string edgeLabel) {
             string l = edgeLabel;
             if (l == null)
                 l = "";
-            var edge = new Edge(source, l, target) {SourceNode = AddNode(source), TargetNode = AddNode(target)};
+            var edge = new Edge(source, l, target) { SourceNode = AddNode(source), TargetNode = AddNode(target), ToolTip = tooltip };
             AddPrecalculatedEdge(edge);
             return edge;
         }
@@ -363,7 +390,7 @@ namespace Microsoft.Msagl.Drawing {
         /// <param name="target">the target node id</param>
         /// <returns>edge</returns>
         public virtual Edge AddEdge(string source, string target) {
-            return AddEdge(source, null, target);
+            return AddEdge(source, target, null, null);
         }
         
         /// <summary>

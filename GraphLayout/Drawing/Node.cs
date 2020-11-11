@@ -30,8 +30,8 @@ namespace Microsoft.Msagl.Drawing {
     /// </summary>
     [Serializable]
     public class Node : DrawingObject, ILabeledObject {
-        
-        
+        public string ToolTip { get; set; }
+
         Label label;
         /// <summary>
         /// the label of the object
@@ -83,6 +83,7 @@ namespace Microsoft.Msagl.Drawing {
             get { return attr; }
             set { attr = value; }
         }
+
         /// <summary>
         /// Creates a Node instance
         /// </summary>
@@ -96,6 +97,12 @@ namespace Microsoft.Msagl.Drawing {
             attr.Id = id;
             Label.Text = id; //one can change the label later
         }
+
+        public Node(string id, string tooltip)
+            : this(id) {
+            ToolTip = tooltip;
+        }
+
         /// <summary>
         /// 
         /// </summary>

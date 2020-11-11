@@ -325,6 +325,7 @@ namespace Microsoft.Msagl.WpfGraphControl {
             if (vis == Visibility.Hidden)
                 return;
             CurvePath.Data = GetICurveWpfGeometry(Edge.GeometryEdge.Curve);
+            CurvePath.ToolTip = Edge.ToolTip;
             if (Edge.Attr.ArrowAtSource)
                 SourceArrowHeadPath.Data = DefiningSourceArrowHead();
             if (Edge.Attr.ArrowAtTarget)

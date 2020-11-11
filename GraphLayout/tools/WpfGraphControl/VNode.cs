@@ -248,9 +248,9 @@ namespace Microsoft.Msagl.WpfGraphControl {
             Panel.SetZIndex(BoundaryPath, ZIndex);
             SetFillAndStroke();
             if (Node.Label != null) {
-                BoundaryPath.ToolTip = Node.LabelText;
+                BoundaryPath.ToolTip = Node.ToolTip;
                 if (FrameworkElementOfNodeForLabel != null)
-                    FrameworkElementOfNodeForLabel.ToolTip = Node.LabelText;
+                    FrameworkElementOfNodeForLabel.ToolTip = Node.ToolTip;
             }
         }
 

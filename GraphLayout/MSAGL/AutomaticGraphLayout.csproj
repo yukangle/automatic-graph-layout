@@ -11,6 +11,12 @@
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <DefineConstants>TEST_MSAGL;TEST_MSAGL;TEST_MSAGL</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../build/Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>../../build/Release</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="AutomaticGraphLayout.nuspec" />
   </ItemGroup>

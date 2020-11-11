@@ -68,9 +68,11 @@ namespace Microsoft.Msagl.Drawing {
             set { label = value; }
         }
 
-/// <summary>
-/// a shortcut to edge label
-/// </summary>
+        public string ToolTip { get; set; }
+
+        /// <summary>
+        /// a shortcut to edge label
+        /// </summary>
         public string LabelText {
             get { return Label == null ? "" : Label.Text; }
             set {
